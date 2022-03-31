@@ -4,24 +4,45 @@ import kotlin.random.Random
 
 class Mapa {
 
-    init{
-        var mapa = MutableList(100){
-            MutableList(100){
+    private val vision = 1
 
-                //var numRandom = (0..5).random()
-                var numRandom = Random.nextInt(0,100)
+    var matriz = MutableList(100) {
+        MutableList(100) {
 
-                when{
-                    numRandom in  0..24 -> Terreno("Llanura", "llanura.jpg", true)
-                    numRandom in 25..44 -> Terreno("Colina","colina.jpg", true)
-                    numRandom in 45..64 -> Terreno("Bosque","bosque.jpg", true)
-                    numRandom in 65..74 -> Terreno("Montaña","montaña.jpg", false)
-                    numRandom in 75..94 -> Terreno("Mar","mar.jpg", false)
-                    numRandom in 95..100-> Terreno("Ciudad","ciudad.jpg", true)
-                    else -> {Terreno("Terreno desconocido", "llanura.jpg", false)}
+            //var numRandom = (0..100).random()
+            var numRandom = Random.nextInt(0, 100)
+
+            when (numRandom) {
+                in  0..24 -> Terreno.crearLlanura()
+                in 25..44 -> Terreno.crearColina()
+                in 45..64 -> Terreno.crearBosque()
+                in 65..74 -> Terreno.crearMontana()
+                in 75..94 -> Terreno.crearMar()
+                in 95..99 -> Terreno.crearCiudad()
+                else -> {
+                    Terreno.crearDesconocido()
                 }
             }
         }
-        println(mapa)
+    }
+    init {
+        println(matriz)
+    }
+    fun obtenerMapaPorPosicion(columna: Int, fila: Int): MutableList<MutableList<Unit>> {
+
+        matriz[columna][fila]
+
+        var posicionJugador = MutableList(11){
+            MutableList(11){
+
+                for (i in matriz) {
+                    matriz[columna + 5][fila]
+                    matriz[columna - 5][fila]
+                    matriz[columna][fila + 5]
+                    matriz[columna][fila - 5]
+                }
+            }
+        }
+        return posicionJugador
     }
 }
