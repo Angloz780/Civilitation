@@ -4,15 +4,12 @@ import kotlin.random.Random
 
 class Mapa {
 
-    private val vision = 1
-
-    var matriz = MutableList(4) {
-        MutableList(4) {
+    private var matriz = MutableList(5) {
+        MutableList(5) {
 
             //var numRandom = (0..100).random()
-            val numRandom = Random.nextInt(0, 4)
 
-            when (numRandom) {
+            when (Random.nextInt(0, 100)) {
                 in  0..24 -> Terreno.crearLlanura()
                 in 25..44 -> Terreno.crearColina()
                 in 45..64 -> Terreno.crearBosque()
@@ -29,18 +26,18 @@ class Mapa {
         println(matriz)
     }
 
-    fun obtenerMapaPorPosicion(colPersonaje: Int, filPersonaje: Int, rango: Int): MutableList<MutableList<Terreno>> {
+    fun obtenerMapaPorPosicion(filPersonaje: Int, colPersonaje: Int, rango: Int) : MutableList<MutableList<Terreno>>{
 
-        val submapa = MutableList((rango * 2) + 1){ colActual ->
-            MutableList((rango * 2) + 1){ filActual ->
-                if (filActual - filPersonaje - rango < 0 || colActual - colPersonaje - rango < 0)  {
+        val subMapa = MutableList((rango * 2) + 1) { colActual ->
+            MutableList((rango * 2) + 1) { filActual ->
+                if (filActual - filPersonaje - rango < 0 || colActual - colPersonaje - rango < 0) {
                     Terreno.crearDesconocido()
-                }else{
+                }else {
                     matriz[colActual - colPersonaje - rango][filActual - filPersonaje - rango]
                 }
             }
         }
-        println(submapa)
-        return submapa
+        println(subMapa)
+        return subMapa
     }
 }

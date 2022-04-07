@@ -10,7 +10,7 @@ class HelloApplication : Application() {
         val mapa = Mapa()
 
         //println(mapa.matriz)
-        mapa.obtenerMapaPorPosicion(1,1,1)
+        mapa.obtenerMapaPorPosicion(1,2,2)
 
         val fxmlLoader = FXMLLoader(HelloApplication::class.java.getResource("hello-view.fxml"))
         val scene = Scene(fxmlLoader.load(), 320.0, 240.0)
