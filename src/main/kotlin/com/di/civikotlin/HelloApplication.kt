@@ -7,10 +7,10 @@ import javafx.stage.Stage
 
 class HelloApplication : Application() {
     override fun start(stage: Stage) {
-        var mapa = Mapa()
+        val mapa = Mapa()
 
-        println(mapa.matriz)
-        mapa.obtenerMapaPorPosicion(10, 10)
+        //println(mapa.matriz)
+        mapa.obtenerMapaPorPosicion(1,1,1)
 
         val fxmlLoader = FXMLLoader(HelloApplication::class.java.getResource("hello-view.fxml"))
         val scene = Scene(fxmlLoader.load(), 320.0, 240.0)

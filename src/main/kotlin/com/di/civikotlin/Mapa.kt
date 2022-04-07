@@ -6,11 +6,11 @@ class Mapa {
 
     private val vision = 1
 
-    var matriz = MutableList(100) {
-        MutableList(100) {
+    var matriz = MutableList(4) {
+        MutableList(4) {
 
             //var numRandom = (0..100).random()
-            var numRandom = Random.nextInt(0, 100)
+            val numRandom = Random.nextInt(0, 4)
 
             when (numRandom) {
                 in  0..24 -> Terreno.crearLlanura()
@@ -28,21 +28,19 @@ class Mapa {
     init {
         println(matriz)
     }
-    fun obtenerMapaPorPosicion(columna: Int, fila: Int): MutableList<MutableList<Unit>> {
 
-        matriz[columna][fila]
+    fun obtenerMapaPorPosicion(colPersonaje: Int, filPersonaje: Int, rango: Int): MutableList<MutableList<Terreno>> {
 
-        var posicionJugador = MutableList(11){
-            MutableList(11){
-
-                for (i in matriz) {
-                    matriz[columna + 5][fila]
-                    matriz[columna - 5][fila]
-                    matriz[columna][fila + 5]
-                    matriz[columna][fila - 5]
+        val submapa = MutableList((rango * 2) + 1){ colActual ->
+            MutableList((rango * 2) + 1){ filActual ->
+                if (filActual - filPersonaje - rango < 0 || colActual - colPersonaje - rango < 0)  {
+                    Terreno.crearDesconocido()
+                }else{
+                    matriz[colActual - colPersonaje - rango][filActual - filPersonaje - rango]
                 }
             }
         }
-        return posicionJugador
+        println(submapa)
+        return submapa
     }
 }

@@ -17,7 +17,7 @@ data class Terreno(val nombre: String, val imagen: String, val sePuedeAndarSobre
         }
 
         fun crearMontana(): Terreno {
-            return Terreno("Montaña", "montaña.jpg", false)
+            return Terreno("Montana", "montaña.jpg", false)
         }
 
         fun crearMar(): Terreno {
