@@ -4,40 +4,35 @@ import kotlin.random.Random
 
 class Mapa {
 
-    private var matriz = MutableList(5) {
-        MutableList(5) {
+    private var matriz = MutableList(Configuracion.columnas) {
+        MutableList(Configuracion.filas) {
 
-            //var numRandom = (0..100).random()
-
-            when (Random.nextInt(0, 100)) {
+            when (Random.nextInt(0,100)) {
                 in  0..24 -> Terreno.crearLlanura()
                 in 25..44 -> Terreno.crearColina()
                 in 45..64 -> Terreno.crearBosque()
-                in 65..74 -> Terreno.crearMontana()
-                in 75..94 -> Terreno.crearMar()
-                in 95..99 -> Terreno.crearCiudad()
+                in 65..69 -> Terreno.crearCiudad()
+                in 70..89 -> Terreno.crearMar()
+                in 90..99 -> Terreno.crearMontana()
                 else -> {
                     Terreno.crearDesconocido()
                 }
             }
         }
     }
-    init {
-        println(matriz)
-    }
 
-    fun obtenerMapaPorPosicion(filPersonaje: Int, colPersonaje: Int, rango: Int) : MutableList<MutableList<Terreno>>{
+    fun obtenerMapaPorPosiciones(fila : Int, columna : Int, rango: Int) : MutableList<MutableList<Terreno>>{
 
-        val subMapa = MutableList((rango * 2) + 1) { colActual ->
-            MutableList((rango * 2) + 1) { filActual ->
-                if (filActual - filPersonaje - rango < 0 || colActual - colPersonaje - rango < 0) {
+        val matriz2 = MutableList((rango * 2) + 1) { filaActual ->
+            MutableList((rango * 2) + 1) { columnaActual ->
+                if (fila - filaActual - rango < 0 || columna - columnaActual - rango < 0 || fila + filaActual - rango > Configuracion.filas || columna + columnaActual - rango > Configuracion.columnas) {
                     Terreno.crearDesconocido()
                 }else {
-                    matriz[colActual - colPersonaje - rango][filActual - filPersonaje - rango]
+                    matriz[fila - filaActual - rango][columna - columnaActual - rango]
                 }
             }
         }
-        println(subMapa)
-        return subMapa
+        println(matriz2)
+        return matriz2
     }
 }
