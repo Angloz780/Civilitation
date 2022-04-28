@@ -3,6 +3,8 @@ package com.di.civikotlin
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
+import javafx.scene.input.KeyCode
+import javafx.scene.input.KeyEvent
 import javafx.stage.Stage
 
 class HelloApplication : Application() {
@@ -13,6 +15,29 @@ class HelloApplication : Application() {
         stage.title = "Hello!"
         stage.scene = scene
         stage.show()
+
+        val mapController = fxmlLoader.getController<MapaController>()
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED){ keyPressed ->
+            when (keyPressed.code) {
+                KeyCode.UP -> {
+                    println("UP")
+                    mapController.moverArriba()
+                }
+                KeyCode.DOWN -> {
+                    println("DOWN")
+                    mapController.moverAbajo()
+                }
+                KeyCode.LEFT -> {
+                    println("LEFT")
+                    mapController.moverIzquierda()
+                }
+                KeyCode.RIGHT -> {
+                    println("RIGHT")
+                    mapController.moverDerecha()
+                }
+            }
+        }
     }
 }
 
