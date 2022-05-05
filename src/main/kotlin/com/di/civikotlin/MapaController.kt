@@ -65,23 +65,23 @@ class MapaController {
     }
 
     fun moverArriba() {
-        println("Mover hacia Arriba")
+        println("Arriba")
         mapa.moverArriba()
         rellenarGirdPaneConMapa(mapa.obtenerMapaPorPosiciones())
     }
     fun moverAbajo(){
-        println("Mover hacia abajo")
+        println("Abajo")
         mapa.moverAbajo()
         rellenarGirdPaneConMapa(mapa.obtenerMapaPorPosiciones())
     }
     fun moverDerecha(){
-        println("Mover hacia la derecha")
-        mapa.moverAbajo()
+        println("Derecha")
+        mapa.moverDerecha()
         rellenarGirdPaneConMapa(mapa.obtenerMapaPorPosiciones())
     }
     fun moverIzquierda(){
-        println("Mover hacia la izquierda")
-        mapa.moverAbajo()
+        println("Izquierda")
+        mapa.moverIzquierda()
         rellenarGirdPaneConMapa(mapa.obtenerMapaPorPosiciones())
     }
 }
