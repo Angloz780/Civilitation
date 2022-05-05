@@ -40,18 +40,20 @@ class Mapa {
         posicionActual.columna++
     }
 
-    fun obtenerMapaPorPosiciones(filaCentro: Int = posicionActual.fila, columnaCentro: Int = posicionActual.columna, vision: Int = Configuracion.rangoVision): MutableList<MutableList<Terreno>> {
+    fun obtenerMapaPorPosiciones(fila: Int = posicionActual.fila, columna: Int = posicionActual.columna, vision: Int = Configuracion.rangoVision): MutableList<MutableList<Terreno>> {
+
+        posicionActual.fila = fila
+        posicionActual.columna = columna
 
         val subMapa = MutableList(Configuracion.filasCampoVision) {
             MutableList(Configuracion.columnasCampoVision) {
                 Terreno.crearDesconocido()
             }
         }
-        for ((filaActual, filaActualMapaGrande) in ((filaCentro - vision)..(filaCentro + vision)).withIndex()) {
-            println("Fila actual del mapa grande = $filaActualMapaGrande")
+        for ((filaActual, filaActualMapaGrande) in ((fila - vision)..(fila + vision)).withIndex()) {
             println("Fila actual = $filaActual")
-            for ((columnaActual, columnaActualMapaGrande) in ((columnaCentro - vision)..(columnaCentro + vision)).withIndex()) {
-                println("Columna actual del mapa grande = $columnaActualMapaGrande")
+
+            for ((columnaActual, columnaActualMapaGrande) in ((columna - vision)..(columna + vision)).withIndex()) {
                 println("Columna actual = $columnaActual")
 
                 if (!(columnaActualMapaGrande < 0 || filaActualMapaGrande < 0 || columnaActualMapaGrande >= Configuracion.columnas || filaActualMapaGrande >= Configuracion.filas)) {
@@ -62,6 +64,5 @@ class Mapa {
         println(matriz)
         println(subMapa)
         return subMapa
-
     }
 }

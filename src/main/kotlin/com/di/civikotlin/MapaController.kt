@@ -1,7 +1,9 @@
 package com.di.civikotlin
 
+import javafx.fxml.FXML
 import javafx.geometry.Insets
 import javafx.geometry.Pos
+import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
@@ -13,7 +15,12 @@ class MapaController {
 
     lateinit var root : GridPane
     private val mapa = Mapa()
-    private val subMapa = mapa.obtenerMapaPorPosiciones(1,1, Configuracion.rangoVision)
+    private val subMapa = mapa.obtenerMapaPorPosiciones(0,0, Configuracion.rangoVision)
+
+    @FXML
+    private lateinit var posicion: Label
+    @FXML
+    private lateinit var filaColumna: Label
 
     fun initialize() {
         iniciarGridPane()
@@ -43,17 +50,26 @@ class MapaController {
             terrenos.forEachIndexed { _, terreno ->
 
                 val vBox = root.children[pos]
+
                 vBox as VBox
                 vBox.style = terreno.fondo
 
                 val imageView = vBox.children[0] as ImageView
+
+                vBox.setOnMouseClicked {
+                    posicion.text = "Casilla: "+terreno.nombre
+                }
+
                 println(terreno.imagen)
+
                 val f = File(terreno.imagen)
+
                 imageView.fitHeight = 60.0
                 imageView.fitWidth = 60.0
                 imageView.image = Image(f.toURI().toURL().toString())
 
                 val label = vBox.children[1] as Label
+
                 label.text = terreno.nombre
                 label.maxWidth = 80.0
                 label.style = terreno.fondo
@@ -68,6 +84,7 @@ class MapaController {
         println("Arriba")
         mapa.moverArriba()
         rellenarGirdPaneConMapa(mapa.obtenerMapaPorPosiciones())
+
     }
     fun moverAbajo(){
         println("Abajo")
@@ -83,5 +100,9 @@ class MapaController {
         println("Izquierda")
         mapa.moverIzquierda()
         rellenarGirdPaneConMapa(mapa.obtenerMapaPorPosiciones())
+    }
+
+    fun clCentrar(){
+        rellenarGirdPaneConMapa((mapa.obtenerMapaPorPosiciones(0, 0, Configuracion.rangoVision)))
     }
 }
