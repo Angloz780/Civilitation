@@ -3,17 +3,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="305.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.di.civikotlin.MapaController">
-  <right>
-    <Label fx:id="posicion" BorderPane.alignment="CENTER_RIGHT" />
-  </right>
-  <top>
-    <Button fx:id="btCentrar" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#clCentrar" text="Centrar" BorderPane.alignment="CENTER" />
-  </top>
+<BorderPane prefHeight="546.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.di.civikotlin.MapaController">
   <center>
-    <GridPane fx:id="root" alignment="CENTER" />
+    <GridPane fx:id="root" alignment="CENTER" prefHeight="419.0" prefWidth="785.0" BorderPane.alignment="CENTER">
+      <columnConstraints>
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+      </rowConstraints></GridPane>
   </center>
-  <bottom>
-    <Label fx:id="filaColumna" BorderPane.alignment="BOTTOM_CENTER"/>
-  </bottom>
+  <right>
+    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #736173;" BorderPane.alignment="CENTER">
+      <children>
+        <Label fx:id="psiciones" alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="240.0" prefHeight="17.0" prefWidth="197.0" textAlignment="JUSTIFY" textFill="WHITE" />
+        <Label fx:id="posi" alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="265.0" prefHeight="17.0" prefWidth="195.0" textAlignment="JUSTIFY" textFill="WHITE" />
+        <Button fx:id="res" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="49.0" layoutY="196.0" mnemonicParsing="false" onMouseClicked="#clickDeRestauracion" text="Centrar mapa" />
+      </children>
+    </AnchorPane>
+  </right>
 </BorderPane>

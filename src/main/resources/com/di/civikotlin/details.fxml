@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="fondo" prefHeight="462.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.di.civikotlin.DetailsController">
+    <Label fx:id="nombre" alignment="CENTER" contentDisplay="CENTER" layoutX="324.0" layoutY="125.0" prefHeight="17.0" prefWidth="393.0" textAlignment="JUSTIFY" textFill="WHITE">
+        <font>
+            <Font name="Cambria Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label fx:id="andar" alignment="CENTER" contentDisplay="CENTER" layoutX="334.0" layoutY="158.0" prefHeight="18.0" prefWidth="305.0" textAlignment="JUSTIFY" textFill="WHITE">
+        <font>
+            <Font name="Cambria Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label fx:id="estado" layoutX="403.0" layoutY="191.0" prefHeight="18.0" prefWidth="306.0" textFill="WHITE">
+        <font>
+            <Font name="Cambria Bold" size="12.0" />
+        </font>
+    </Label>
+
+    <ImageView fx:id="imagen" fitHeight="150.0" fitWidth="200.0" layoutX="109.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+
+    <Button fx:id="bt1" focusTraversable="false" layoutX="490.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#cambiarEstado1" text="Saquear" />
+    <Button fx:id="bt2" focusTraversable="false" layoutX="400.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#cambiarEstado2" text="Conquistar" />
+    <Button fx:id="bt3" focusTraversable="false" layoutX="403.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#cambiarEstado3" text="Mina" />
+    <Button fx:id="bt4" focusTraversable="false" layoutX="403.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#cambiarEstado4" text="Granja" />
+
+    <ImageView fx:id="saqueo" fitHeight="66.0" fitWidth="84.0" layoutX="483.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="conquista" fitHeight="66.0" fitWidth="84.0" layoutX="404.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="mina" fitHeight="66.0" fitWidth="84.0" layoutX="395.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="granja" fitHeight="66.0" fitWidth="84.0" layoutX="395.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true" />
+</AnchorPane>

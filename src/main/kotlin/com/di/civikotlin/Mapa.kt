@@ -61,8 +61,16 @@ class Mapa {
                 }
             }
         }
-        println(matriz)
         println(subMapa)
         return subMapa
     }
+
+    fun obtenerFilaActual(): Int {
+        return posicionActual.fila
+    }
+
+    fun obtenerColumnaActual(): Int {
+        return posicionActual.columna
+    }
+
 }

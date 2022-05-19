@@ -1,40 +1,45 @@
 package com.di.civikotlin
 
 import javafx.fxml.FXML
+import javafx.fxml.FXMLLoader
 import javafx.geometry.Insets
 import javafx.geometry.Pos
-import javafx.scene.control.Button
+import javafx.scene.Scene
 import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
+import javafx.scene.input.MouseEvent
+import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.GridPane
 import javafx.scene.layout.VBox
+import javafx.stage.Stage
 import java.io.File
 
 class MapaController {
 
-    lateinit var root : GridPane
-    private val mapa = Mapa()
-    private val subMapa = mapa.obtenerMapaPorPosiciones(0,0, Configuracion.rangoVision)
+    @FXML
+    private lateinit var posi: Label
+    @FXML
+    private lateinit var psiciones: Label
 
-    @FXML
-    private lateinit var posicion: Label
-    @FXML
-    private lateinit var filaColumna: Label
+    lateinit var root : GridPane
+
+    var mapa = Mapa()
+    var subMapa =  mapa.obtenerMapaPorPosiciones(0,0,Configuracion.rangoVision)
 
     fun initialize() {
         iniciarGridPane()
-        rellenarGirdPaneConMapa(subMapa)
+        rellenarGirdPane(subMapa)
     }
 
     private fun iniciarGridPane() {
+
         for (columna in 0 until Configuracion.columnasCampoVision)
             for (fila in 0 until Configuracion.filasCampoVision) {
                 val vBox = VBox()
                 vBox.children.add(0, ImageView())
-                vBox.children.add(1, Label("fila $fila columna $columna"))
+                vBox.children.add(1, Label())
                 root.add(vBox, columna, fila)
-                vBox.alignment = Pos.CENTER
 
             }
         root.hgap = 5.0
@@ -42,67 +47,109 @@ class MapaController {
         root.padding = Insets(50.0, 50.0, 50.0, 50.0)
     }
 
-    private fun rellenarGirdPaneConMapa(subMapa: MutableList<MutableList<Terreno>>) {
+    private fun rellenarGirdPane(subMapa: MutableList<MutableList<Terreno>>) {
 
-        var pos = 0
+        var posicion = 0
 
-        subMapa.forEachIndexed { _, terrenos ->
-            terrenos.forEachIndexed { _, terreno ->
+        subMapa.forEach { terreno1 ->
+            terreno1.forEach {terreno2 ->
 
-                val vBox = root.children[pos]
+                val vBox = root.children[posicion]
 
                 vBox as VBox
-                vBox.style = terreno.fondo
 
                 val imageView = vBox.children[0] as ImageView
+                val f = File(terreno2.imagen)
 
-                vBox.setOnMouseClicked {
-                    posicion.text = "Casilla: "+terreno.nombre
+                val nombre = vBox.children[1] as Label
+
+                if (terreno2.estado != ""){
+                    nombre.text = terreno2.estado
+                }else{
+                    nombre.text = terreno2.nombre
                 }
 
-                println(terreno.imagen)
+                nombre.maxWidth = 80.0
+                nombre.style = terreno2.fondoPaisaje
+                nombre.alignment = Pos.CENTER
 
-                val f = File(terreno.imagen)
+                vBox.setOnMouseClicked {
+                    posi.text = "El terreno es "+terreno2.nombre
+                    abrirVentanaDetails(terreno2)
+                }
 
-                imageView.fitHeight = 60.0
-                imageView.fitWidth = 60.0
+                vBox.style = terreno2.fondoPaisaje
+
+                imageView.fitHeight = 80.0
+                imageView.fitWidth = 80.0
                 imageView.image = Image(f.toURI().toURL().toString())
 
                 val label = vBox.children[1] as Label
 
-                label.text = terreno.nombre
+                label.text = terreno2.nombre
                 label.maxWidth = 80.0
-                label.style = terreno.fondo
+                label.style = terreno2.fondo
                 label.alignment = Pos.CENTER
 
-                pos++
+                posicion++
             }
+
+            mostrarPosiconActual()
         }
     }
 
     fun moverArriba() {
         println("Arriba")
         mapa.moverArriba()
-        rellenarGirdPaneConMapa(mapa.obtenerMapaPorPosiciones())
+        rellenarGirdPane(mapa.obtenerMapaPorPosiciones())
+        mostrarPosiconActual()
 
     }
     fun moverAbajo(){
         println("Abajo")
         mapa.moverAbajo()
-        rellenarGirdPaneConMapa(mapa.obtenerMapaPorPosiciones())
+        rellenarGirdPane(mapa.obtenerMapaPorPosiciones())
+        mostrarPosiconActual()
     }
     fun moverDerecha(){
         println("Derecha")
         mapa.moverDerecha()
-        rellenarGirdPaneConMapa(mapa.obtenerMapaPorPosiciones())
+        rellenarGirdPane(mapa.obtenerMapaPorPosiciones())
+        mostrarPosiconActual()
     }
     fun moverIzquierda(){
         println("Izquierda")
         mapa.moverIzquierda()
-        rellenarGirdPaneConMapa(mapa.obtenerMapaPorPosiciones())
+        rellenarGirdPane(mapa.obtenerMapaPorPosiciones())
+        mostrarPosiconActual()
     }
 
-    fun clCentrar(){
-        rellenarGirdPaneConMapa((mapa.obtenerMapaPorPosiciones(0, 0, Configuracion.rangoVision)))
+    @FXML
+    fun clickDeRestauracion(mouseEvent: MouseEvent) {
+        rellenarGirdPane(mapa.obtenerMapaPorPosiciones(0,0, Configuracion.rangoVision))
     }
+
+    fun mostrarPosiconActual() {
+        psiciones.text = "Posicion actual ( "+ mapa.obtenerColumnaActual() + "," +mapa.obtenerFilaActual() + ")"
+    }
+
+    fun reconstruir(){
+        rellenarGirdPane(subMapa)
+
+    }
+
+    fun abrirVentanaDetails(terreno: Terreno){
+        val stage = Stage()
+        val loader = FXMLLoader(javaClass.getResource("details.fxml"))
+        val root = loader.load<AnchorPane>()
+        val scene = Scene(root,720.0,462.0)
+        stage.scene = scene
+        stage.show()
+        val detailsController = loader.getController<DetailsController>()
+        detailsController.enviarTerreno(terreno)
+        detailsController.comprobacionDeEstado()
+        detailsController.imagenesOcultas()
+        detailsController.enviarDatos(this)
+    }
+
 }
