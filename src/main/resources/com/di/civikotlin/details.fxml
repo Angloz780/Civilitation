@@ -26,7 +26,7 @@
 
     <Button fx:id="bt1" focusTraversable="false" layoutX="490.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#cambiarEstado1" text="Saquear" />
     <Button fx:id="bt2" focusTraversable="false" layoutX="400.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#cambiarEstado2" text="Conquistar" />
-    <Button fx:id="bt3" focusTraversable="false" layoutX="403.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#cambiarEstado3" text="Mina" />
+    <Button fx:id="bt3" focusTraversable="false" layoutX="403.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#cambiarEstado3" text=" Mina" />
     <Button fx:id="bt4" focusTraversable="false" layoutX="403.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#cambiarEstado4" text="Granja" />
 
     <ImageView fx:id="saqueo" fitHeight="66.0" fitWidth="84.0" layoutX="483.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true" />

@@ -36,6 +36,7 @@ class HelloApplication : Application() {
                     println("RIGHT")
                     mapController.moverDerecha()
                 }
+                else -> {}
             }
         }
     }

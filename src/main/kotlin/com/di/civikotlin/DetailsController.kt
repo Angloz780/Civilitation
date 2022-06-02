@@ -109,39 +109,42 @@ class DetailsController {
     @FXML
     fun cambiarEstado1() {
         terreno?.estado = "Saqueado"
-        estado.text = "El estado del lugar es "+ terreno?.estado
+        estado.text = "El estado del lugar es " + terreno?.estado
         mapaController.reconstruir()
         saqueo.isVisible = true
-        conquista.isVisible= false
+        conquista.isVisible = false
         mina.isVisible = false
         granja.isVisible = false
     }
+
     @FXML
     fun cambiarEstado2() {
         terreno?.estado = "Conquistado"
-        estado.text = "El estado del lugar es "+ terreno?.estado
+        estado.text = "El estado del lugar es " + terreno?.estado
         mapaController.reconstruir()
-        conquista.isVisible=true
+        conquista.isVisible = true
         saqueo.isVisible = false
         mina.isVisible = false
         granja.isVisible = false
     }
+
     @FXML
     fun cambiarEstado3() {
         terreno?.estado = "Mina"
-        estado.text = "El estado del lugar es "+ terreno?.estado
+        estado.text = "El estado del lugar es " + terreno?.estado
         mapaController.reconstruir()
-        conquista.isVisible=false
+        conquista.isVisible = false
         saqueo.isVisible = false
         mina.isVisible = true
         granja.isVisible = false
     }
+
     @FXML
     fun cambiarEstado4() {
         terreno?.estado = "Granja"
-        estado.text = "El estado del lugar es "+ terreno?.estado
+        estado.text = "El estado del lugar es " + terreno?.estado
         mapaController.reconstruir()
-        conquista.isVisible=false
+        conquista.isVisible = false
         saqueo.isVisible = false
         mina.isVisible = false
         granja.isVisible = true

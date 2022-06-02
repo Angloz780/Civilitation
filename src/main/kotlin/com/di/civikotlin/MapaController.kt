@@ -8,7 +8,6 @@ import javafx.scene.Scene
 import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
-import javafx.scene.input.MouseEvent
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.GridPane
 import javafx.scene.layout.VBox
@@ -84,13 +83,6 @@ class MapaController {
                 imageView.fitWidth = 80.0
                 imageView.image = Image(f.toURI().toURL().toString())
 
-                val label = vBox.children[1] as Label
-
-                label.text = terreno2.nombre
-                label.maxWidth = 80.0
-                label.style = terreno2.fondo
-                label.alignment = Pos.CENTER
-
                 posicion++
             }
 
@@ -125,7 +117,7 @@ class MapaController {
     }
 
     @FXML
-    fun clickDeRestauracion(mouseEvent: MouseEvent) {
+    fun clickDeRestauracion() {
         rellenarGirdPane(mapa.obtenerMapaPorPosiciones(0,0, Configuracion.rangoVision))
     }
 
@@ -135,7 +127,6 @@ class MapaController {
 
     fun reconstruir(){
         rellenarGirdPane(subMapa)
-
     }
 
     fun abrirVentanaDetails(terreno: Terreno){
@@ -151,5 +142,4 @@ class MapaController {
         detailsController.imagenesOcultas()
         detailsController.enviarDatos(this)
     }
-
 }

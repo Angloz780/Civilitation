@@ -1,6 +1,6 @@
 package com.di.civikotlin
 
-data class Terreno(val nombre: String, val imagen: String, val fondo: String, val sePuedeAndarSobreEl: Boolean, val fondoPaisaje: String, var estado: String = "") {
+data class Terreno(val nombre: String, val imagen: String, val fondo: String, val sePuedeAndarSobreEl: Boolean, val fondoPaisaje: String, var estado: String = "", var unidad: Unidad? = null) {
 
     companion object {
 
@@ -29,7 +29,7 @@ data class Terreno(val nombre: String, val imagen: String, val fondo: String, va
         }
 
         fun crearDesconocido(): Terreno {
-            return Terreno("Terreno desconocido", "src\\main\\resources\\Terreno\\Desconocido.png","-fx-background-color: #90A4AE;", false, "-fx-background-color: #90A4AE;")
+            return Terreno("Desconocido", "src\\main\\resources\\Terreno\\Desconocido.png","-fx-background-color: #90A4AE;", false, "-fx-background-color: #90A4AE;")
         }
     }
 }
