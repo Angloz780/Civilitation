@@ -35,15 +35,15 @@ class MapaController {
 
         for (columna in 0 until Configuracion.columnasCampoVision)
             for (fila in 0 until Configuracion.filasCampoVision) {
-                val vBox = VBox()
+                val vBox = AnchorPane()
                 vBox.children.add(0, ImageView())
-                vBox.children.add(1, Label())
+                vBox.children.add(1, ImageView())
+                vBox.children.add(2, Label())
                 root.add(vBox, columna, fila)
 
             }
         root.hgap = 5.0
         root.vgap = 5.0
-        root.padding = Insets(50.0, 50.0, 50.0, 50.0)
     }
 
     private fun rellenarGirdPane(subMapa: MutableList<MutableList<Terreno>>) {
@@ -55,12 +55,18 @@ class MapaController {
 
                 val vBox = root.children[posicion]
 
-                vBox as VBox
+                vBox as AnchorPane
+                var f2 = File("")
 
                 val imageView = vBox.children[0] as ImageView
                 val f = File(terreno2.imagen)
 
-                val nombre = vBox.children[1] as Label
+                val nombre = vBox.children[2] as Label
+
+                val imageView2 = vBox.children[1] as ImageView
+                terreno2.unidad?.let {
+                    f2 = File(it.imagen)
+                }
 
                 if (terreno2.estado != ""){
                     nombre.text = terreno2.estado
@@ -68,19 +74,34 @@ class MapaController {
                     nombre.text = terreno2.nombre
                 }
 
-                nombre.maxWidth = 80.0
-                nombre.style = terreno2.fondoPaisaje
+                nombre.layoutX = 0.0
+                nombre.layoutY = 80.0
+                nombre.minHeight = 20.0
+                nombre.minWidth = 120.0
                 nombre.alignment = Pos.CENTER
+                nombre.style = terreno2.fondoPaisaje
 
                 vBox.setOnMouseClicked {
                     posi.text = "El terreno es "+terreno2.nombre
                     abrirVentanaDetails(terreno2)
                 }
 
-                vBox.style = terreno2.fondoPaisaje
+                if (terreno2.unidad?.seleccionado == true){
+                    vBox.style = terreno2.fondo
+                }else{
+                    vBox.style = terreno2.fondoPaisaje
+                }
 
-                imageView.fitHeight = 80.0
-                imageView.fitWidth = 80.0
+                imageView2.layoutX = 5.0
+                imageView2.layoutY = 5.0
+                imageView2.fitHeight = 25.0
+                imageView2.fitWidth = 25.0
+                imageView2.image = Image(f2.toURI().toURL().toString())
+
+                imageView.layoutX = 25.0
+                imageView.layoutY = 30.0
+                imageView.fitHeight = 50.0
+                imageView.fitWidth =60.0
                 imageView.image = Image(f.toURI().toURL().toString())
 
                 posicion++

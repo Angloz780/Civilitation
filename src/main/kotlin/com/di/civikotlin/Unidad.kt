@@ -1,6 +1,6 @@
 package com.di.civikotlin
 
-class Unidad (val tipo: String, val imagen: String, val vida: Int){
+class Unidad (val tipo: String, val imagen: String, val vida: Int, var seleccionado: Boolean = false){
 
     companion object {
 
