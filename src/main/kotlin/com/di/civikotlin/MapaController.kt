@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader
 import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.Scene
+import javafx.scene.control.Alert
 import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
@@ -13,6 +14,7 @@ import javafx.scene.layout.GridPane
 import javafx.scene.layout.VBox
 import javafx.stage.Stage
 import java.io.File
+import kotlin.random.Random
 
 class MapaController {
 
@@ -110,6 +112,84 @@ class MapaController {
             mostrarPosiconActual()
         }
     }
+    fun moverPersonaje(terreno: Terreno){
+
+        if (terreno.unidad?.seleccionado == true){
+            mapa.moverArriba()
+            mapa.moverAbajo()
+            mapa.moverDerecha()
+            mapa.moverIzquierda()
+        }else{
+            moverArriba()
+            moverAbajo()
+            moverDerecha()
+            moverIzquierda()
+        }
+    }
+
+    fun mirarSiAbajoEsTransitable(terreno: Terreno){
+
+        if (!terreno.sePuedeAndarSobreEl){
+            mostrarAlertInfo()
+        }else{
+            mapa.moverAbajo()
+        }
+    }
+
+    fun mirarSiArribaEsTransitable(terreno: Terreno){
+
+        if (!terreno.sePuedeAndarSobreEl){
+            mostrarAlertInfo()
+        }else{
+            mapa.moverArriba()
+        }
+    }
+
+    fun mirarSiDerechaEsTransitable(terreno: Terreno){
+
+        if (!terreno.sePuedeAndarSobreEl){
+            mostrarAlertInfo()
+        }else{
+            mapa.moverDerecha()
+        }
+    }
+
+    fun mirarSiIzquierdaEsTransitable(terreno: Terreno){
+
+        if (!terreno.sePuedeAndarSobreEl){
+            mostrarAlertInfo()
+        }else{
+            mapa.moverIzquierda()
+        }
+    }
+
+    @FXML
+    fun mostrarAlertInfo() {
+        val alert = Alert(Alert.AlertType.INFORMATION)
+        alert.headerText = null
+        alert.title = "Informacion"
+        alert.contentText = "Terreno no transitable"
+        alert.showAndWait()
+    }
+
+    fun mirarSiHayUnidad(terreno: Terreno){
+
+        if (terreno.unidad != null && comprobarVentana){
+            //batalla
+        }else{
+
+
+        }
+
+    }
+
+    fun realizarBatalla(unidad: Unidad){
+
+        val random = Random.nextInt(25,50)
+
+        unidad.vida = unidad.vida - random
+
+    }
 
     fun moverArriba() {
         println("Arriba")
@@ -149,6 +229,8 @@ class MapaController {
     fun reconstruir(){
         rellenarGirdPane(subMapa)
     }
+
+    var comprobarVentana = false
 
     fun abrirVentanaDetails(terreno: Terreno){
         val stage = Stage()

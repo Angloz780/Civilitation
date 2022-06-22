@@ -52,7 +52,6 @@ class DetailsController {
         imagen.image = Image(f.toURI().toURL().toString())
 
         comprobacionDeEstado()
-
     }
 
     fun comprobacionDeEstado(){
